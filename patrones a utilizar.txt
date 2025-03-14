@@ -1,0 +1,4 @@
+singleton para simulacion local de base de datos
+factory crear diferenets tipos e usuarios (alumno, maestro admin)
+observer para notificar usuarios de tareas creadas
+Strategy para calificar de diferentes maneras un curso (como en ponderación)
