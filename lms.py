@@ -67,6 +67,7 @@ class LMS:
     def __init__(self):
         if not hasattr(self, '_tasks'):
             self._tasks = {}
+            self._users = users_data
         
     def add_task(self, name, description='', teacher='', due_date=''):
         task_id = len(self._tasks) + 1
