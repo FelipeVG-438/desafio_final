@@ -53,20 +53,24 @@ class UserFactory:
         elif role == 'user':
             return Student(username, password)
         else:
-            raise ValueError('Rol no valido')
+            raise ValueError('Invalid role')
 
 # Singleton
 class LMS:
     _instance = None
-    _tasks = {}
     
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(LMS, cls).__new__(cls)
         return cls._instance
     
+    def __init__(self):
+        if not hasattr(self, '_tasks'):
+            self._tasks = {}
+        
     def add_task(self, task):
-        self._tasks.append(task)
+        task_id = len(self._tasks) + 1
+        self._tasks[task_id] = task
         
     def get_tasks(self):
         return self._tasks
@@ -75,5 +79,13 @@ user_factory = UserFactory()
 admin = user_factory.create_user('Juan', 'admin_pass', 'admin')
 teacher = user_factory.create_user('Pedro', 'teacher_pass', 'teacher')
 student = user_factory.create_user('Luis', 'student_pass', 'user')
+
+lms = LMS()
+lms.add_task('Task 1')
+
+lms2 = LMS()
+lms.add_task('Task 2')
+
+print(lms.get_tasks())
 
 print(users)
