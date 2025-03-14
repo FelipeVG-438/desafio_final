@@ -76,27 +76,28 @@ class LMS(Subject):
             return {'error': 'No tasks found for this teacher'}
         return teacher_tasks
 
-# Uso del sistema 
-notificator = Notificator()
+if __name__ == '__main__':
+    notificator = Notificator()
 
-user_factory = UserFactory()
-user_factory.attach(notificator)
+    user_factory = UserFactory()
+    user_factory.attach(notificator)
 
-lms = LMS()
-lms.attach(notificator)
+    lms = LMS()
+    lms.attach(notificator)
 
-# Crear usuarios
-admin = user_factory.create_user('Juan', 'admin_pass', 'admin')
-teacher = user_factory.create_user('Pedro', 'teacher_pass', 'teacher')
-student = user_factory.create_user('Luis', 'student_pass', 'user')
+    # Crear usuarios
+    admin = user_factory.create_user('Juan', 'admin_pass', 'admin')
+    teacher = user_factory.create_user('Pedro', 'teacher_pass', 'teacher')
+    student = user_factory.create_user('Luis', 'student_pass', 'user')
 
-# Agregar tareas
-lms.add_task('Task 1', 'Description of task 1', 'Pedro', '2023-12-31')
-lms.add_task('Task 2', 'Description of task 2', 'Juan', '2023-12-31')
+    # Agregar tareas
+    lms.add_task('Task 1', 'Description of task 1', 'Pedro', '2023-12-31')
+    lms.add_task('Task 2', 'Description of task 2', 'Juan', '2023-12-31')
 
-# Mostrar tareas y usuarios
-print("\nAll tasks:")
-print(lms.get_tasks())
+    # Mostrar tareas y usuarios
+    print("\nAll tasks:")
+    print(lms.get_tasks())
 
-print("\nAll users:")
-print(users_data)
+    print("\nAll users:")
+    print(users_data)
+
