@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 import bcrypt
 
-users = {
-    'admin': {'password': bcrypt.hashpw(b'admin123', bcrypt.gensalt()), 'role': 'admin'},
-    'teacher': {'password': bcrypt.hashpw(b'teacher123', bcrypt.gensalt()), 'role': 'teacher'},
-    'student': {'password': bcrypt.hashpw(b'student123', bcrypt.gensalt()), 'role': 'student'}
+users_data = {
+    '1': {'name': 'admin', 'password': bcrypt.hashpw(b'admin123', bcrypt.gensalt()), 'role': 'admin'},
+    '2': {'name': 'teacher', 'password': bcrypt.hashpw(b'teacher123', bcrypt.gensalt()), 'role': 'teacher'},
+    '3': {'name': 'student', 'password': bcrypt.hashpw(b'student123', bcrypt.gensalt()), 'role': 'student'}
 }
 
 # Factory
@@ -20,7 +20,7 @@ class Users(ABC):
 class Student(Users):
     def __init__(self, username, password):
         super().__init__(username, password)
-        users[username] = {'password' : bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'student'}
+        users[len(users) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'student'}
         
     def permitions(self):
         return "Student permissions"
@@ -28,7 +28,7 @@ class Student(Users):
 class Teacher(Users):
     def __init__(self, username, password):
         super().__init__(username, password)
-        users[username] = {'password' : bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'teacher'}
+        users[len(users) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'teacher'}
         
     def permitions(self):
         return "Teacher permissions"
@@ -36,7 +36,7 @@ class Teacher(Users):
 class Admin(Users):
     def __init__(self, username, password):
         super().__init__(username, password)
-        users[username] = {'password' : bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'admin'}
+        users[len(users) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'admin'}
         
     def permitions(self):
         return "Admin permissions"
@@ -81,6 +81,7 @@ class LMS:
             return {'error': 'No tasks found for this teacher'}
         return teacher_tasks
 
+# Pruebas
 user_factory = UserFactory()
 admin = user_factory.create_user('Juan', 'admin_pass', 'admin')
 teacher = user_factory.create_user('Pedro', 'teacher_pass', 'teacher')
