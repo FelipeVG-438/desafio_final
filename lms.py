@@ -20,7 +20,7 @@ class Users(ABC):
 class Student(Users):
     def __init__(self, username, password):
         super().__init__(username, password)
-        users[len(users) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'student'}
+        users_data[len(users_data) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'student'}
         
     def permitions(self):
         return "Student permissions"
@@ -28,7 +28,7 @@ class Student(Users):
 class Teacher(Users):
     def __init__(self, username, password):
         super().__init__(username, password)
-        users[len(users) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'teacher'}
+        users_data[len(users_data) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'teacher'}
         
     def permitions(self):
         return "Teacher permissions"
@@ -36,7 +36,7 @@ class Teacher(Users):
 class Admin(Users):
     def __init__(self, username, password):
         super().__init__(username, password)
-        users[len(users) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'admin'}
+        users_data[len(users_data) + 1] = {'name':username, 'password': bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), 'role' : 'admin'}
         
     def permitions(self):
         return "Admin permissions"
@@ -95,4 +95,4 @@ lms2.add_task('Task 2', 'Description of task 2', 'Juan', '2023-12-31')
 
 print(lms.get_tasks())
 
-print(users)
+print(users_data)
