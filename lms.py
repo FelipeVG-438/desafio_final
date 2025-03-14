@@ -3,7 +3,7 @@ import bcrypt
 
 users_data = {
     '1': {'name': 'admin', 'password': bcrypt.hashpw(b'admin123', bcrypt.gensalt()), 'role': 'admin'},
-    '2': {'name': 'teacher', 'password': bcrypt.hashpw(b'teacher123', bcrypt.gensalt()), 'role': 'teacher'},
+    '2': {'name': 'Pedro', 'password': bcrypt.hashpw(b'teacher123', bcrypt.gensalt()), 'role': 'teacher'},
     '3': {'name': 'student', 'password': bcrypt.hashpw(b'student123', bcrypt.gensalt()), 'role': 'student'}
 }
 
