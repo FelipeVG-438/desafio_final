@@ -7,8 +7,6 @@ from lms import LMS, UserFactory
 # home GET, login, register, teachers
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:17981798@localhost:5432/restaurant'
-# db = SQLAlchemy(app)
 
 @app.route('/', methods=['GET'])
 def index():

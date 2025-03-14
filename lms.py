@@ -68,12 +68,18 @@ class LMS:
         if not hasattr(self, '_tasks'):
             self._tasks = {}
         
-    def add_task(self, task):
+    def add_task(self, name, description='', teacher='', due_date=''):
         task_id = len(self._tasks) + 1
-        self._tasks[task_id] = task
+        self._tasks[task_id] = {'name': name, 'description': description, 'teacher': teacher, 'due_date': due_date}
         
     def get_tasks(self):
         return self._tasks
+    
+    def get_teacher_tasks(self, teacher):
+        teacher_tasks = [task for task in self._tasks.values() if task['teacher'] == teacher]
+        if not teacher_tasks:
+            return {'error': 'No tasks found for this teacher'}
+        return teacher_tasks
 
 user_factory = UserFactory()
 admin = user_factory.create_user('Juan', 'admin_pass', 'admin')
@@ -81,10 +87,10 @@ teacher = user_factory.create_user('Pedro', 'teacher_pass', 'teacher')
 student = user_factory.create_user('Luis', 'student_pass', 'user')
 
 lms = LMS()
-lms.add_task('Task 1')
+lms.add_task('Task 1', 'Description of task 1', 'Pedro', '2023-12-31')
 
 lms2 = LMS()
-lms.add_task('Task 2')
+lms2.add_task('Task 2', 'Description of task 2', 'Juan', '2023-12-31')
 
 print(lms.get_tasks())
 
